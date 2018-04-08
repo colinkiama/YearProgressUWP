@@ -25,6 +25,25 @@ namespace YearProgress.View
         public MainPage()
         {
             this.InitializeComponent();
+            this.Loaded += MainPage_Loaded;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            AnimateProgressBar();
+        }
+
+        private void AnimateProgressBar()
+        {
+            int percentageToLoad = ViewModel.YearProgress;
+            const int timeForAnimationInSeconds = 3;
+            double animationTimeInMiliseconds = timeForAnimationInSeconds * 1000;
+            const int intervals = 10;
+            double intervalTime = animationTimeInMiliseconds / 10;
+
+            
+
+
         }
     }
 }

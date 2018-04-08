@@ -22,9 +22,13 @@
                 <TextBlock Text="{x:Bind ViewModel.DateCalcObject.yearProgressPercentage, Converter={StaticResource PercentageConverter}}"
                            HorizontalAlignment="Center"
                            FontSize="128"
-                           FontWeight="SemiBold"/>
+                           FontWeight="SemiBold"
+                           />
                 <ProgressBar
-                   Margin="80,0"/>
+                   Margin="80,0"
+                    Value="0"
+                    Foreground="White"
+                    Name="PercentageProgressBar"/>
             </StackPanel>
         </Grid>
     </Grid>

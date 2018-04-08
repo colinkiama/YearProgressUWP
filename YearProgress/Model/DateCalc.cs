@@ -21,19 +21,26 @@ namespace YearProgress.Model
 
         private int calculateYearProgress()
         {
-            var currentDateTimeSpan = TimeSpan.FromTicks(currentDate.Ticks);
-            var newYearDateTimeSpan = TimeSpan.FromTicks(newYearDate.Ticks);
+            DateTime beginningOfYearDate = new DateTime(currentDate.Year, 1, 1);
 
-            
 
-            double currentDateDays = currentDateTimeSpan.TotalMilliseconds;
-            double newYearDateDays = newYearDateTimeSpan.TotalMilliseconds;
+            var currentDateSpan = TimeSpan.FromTicks(currentDate.Ticks);
+            var newYearDateSpan = TimeSpan.FromTicks(newYearDate.Ticks);
+            var currentYearDateSpan = TimeSpan.FromTicks(beginningOfYearDate.Ticks);
 
-            double progressAsDouble = (currentDateDays / newYearDateDays) * (double)100;
+            double currentDateDays = currentDateSpan.TotalDays;
+            double newYearDays = newYearDateSpan.TotalDays;
+            double currentYearDays = currentYearDateSpan.TotalDays;
 
-            
-       
-            return (int)Math.Round(progressAsDouble);
+            double totalDaysDifference = newYearDays - currentDateDays;
+
+            double yearLengthInDays = newYearDays - currentYearDays;
+
+            double daysThatHaveWentBySinceYearStart = yearLengthInDays - totalDaysDifference;
+
+            double percentageAsDouble = daysThatHaveWentBySinceYearStart / yearLengthInDays * 100;
+
+            return (int)Math.Floor(percentageAsDouble);
         }
 
         private TimeSpan GetDifferenceFromNewYear()

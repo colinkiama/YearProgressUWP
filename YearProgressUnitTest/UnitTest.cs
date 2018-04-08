@@ -8,7 +8,7 @@ namespace YearProgressUnitTest
     [TestClass]
     public class DateCalcTests
     {
-        DateTime currentDate = DateTime.Now;
+        DateTime currentDate = new DateTime(2018,4,8);
         DateTime newYearDate;
         public void Do()
         {

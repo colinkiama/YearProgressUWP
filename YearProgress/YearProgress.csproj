@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Converters\PercentageConverter.cs" />
     <Compile Include="Model\DateCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +129,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="UltraTimer.ColinKiama">
+      <Version>1.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

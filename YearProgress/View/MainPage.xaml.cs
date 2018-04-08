@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UltraTimer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,25 +26,35 @@ namespace YearProgress.View
         public MainPage()
         {
             this.InitializeComponent();
-            this.Loaded += MainPage_Loaded;
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
             AnimateProgressBar();
         }
 
         private void AnimateProgressBar()
         {
-            int percentageToLoad = ViewModel.YearProgress;
-            const int timeForAnimationInSeconds = 3;
-            double animationTimeInMiliseconds = timeForAnimationInSeconds * 1000;
-            const int intervals = 10;
-            double intervalTime = animationTimeInMiliseconds / 10;
-
             
+            const int numberOfIntervals = 25;
+
+            int percentageToLoad = ViewModel.YearProgress;
+            int animationTimeInMiliseconds = 500;
+            int intervalAmount = percentageToLoad/ numberOfIntervals;
+            int intervalTime = animationTimeInMiliseconds / numberOfIntervals;
+
+            Timer progressTimer = new Timer(new TimeSpan(0,0,0,0,animationTimeInMiliseconds), new TimeSpan(0,0,0,0,intervalTime));
+            progressTimer.TimerTicked += (s, e) =>
+            {
+                PercentageProgressBar.Value += intervalAmount;
+            };
+
+            progressTimer.StartTimer();
+
 
 
         }
+
     }
 }

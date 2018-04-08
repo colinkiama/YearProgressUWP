@@ -11,12 +11,13 @@ namespace YearProgress.ViewModel
     class MainPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler ViewModelLoaded;
         public DateCalc DateCalcObject { get; set; }
         private int _yearProgress;
 
         public int YearProgress
         {
-            get { return _yearProgress; }
+            get { return DateCalcObject.yearProgressPercentage; }
             set
             {
                 _yearProgress = value;
@@ -32,6 +33,7 @@ namespace YearProgress.ViewModel
         public MainPageViewModel()
         {
             DateCalcObject = new DateCalc();
+            ViewModelLoaded?.Invoke(this, EventArgs.Empty);
         }
 
     }

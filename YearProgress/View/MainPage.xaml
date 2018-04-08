@@ -5,9 +5,27 @@
     xmlns:local="using:YearProgress.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d"
+    xmlns:vm="using:YearProgress.ViewModel"
+    xmlns:converters="using:YearProgress.Converters">
+    <Page.Resources>
+        <vm:MainPageViewModel x:Name="ViewModel"/>
+        <converters:PercentageConverter x:Name="PercentageConverter"/>
+    </Page.Resources>
+    <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="{x:Bind ViewModel.DateCalcObject.yearProgressPercentage, Converter={StaticResource PercentageConverter}}"
+                           HorizontalAlignment="Center"
+                           FontSize="128"
+                           FontWeight="SemiBold"/>
+                <ProgressBar
+                   Margin="80,0"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

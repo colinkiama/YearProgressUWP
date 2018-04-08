@@ -21,7 +21,19 @@ namespace YearProgress.Model
 
         private int calculateYearProgress()
         {
-            return (int) (currentDate.Ticks / newYearDate.Ticks * 100);
+            var currentDateTimeSpan = TimeSpan.FromTicks(currentDate.Ticks);
+            var newYearDateTimeSpan = TimeSpan.FromTicks(newYearDate.Ticks);
+
+            
+
+            double currentDateDays = currentDateTimeSpan.TotalMilliseconds;
+            double newYearDateDays = newYearDateTimeSpan.TotalMilliseconds;
+
+            double progressAsDouble = (currentDateDays / newYearDateDays) * (double)100;
+
+            
+       
+            return (int)Math.Round(progressAsDouble);
         }
 
         private TimeSpan GetDifferenceFromNewYear()

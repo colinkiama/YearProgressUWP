@@ -35,8 +35,30 @@ namespace YearProgressUnitTest
         public void PercentageDateTest()
         {
             setNewYearDate();
-            long percentageAsDouble = (currentDate.Ticks / newYearDate.Ticks);
-            Assert.IsTrue(percentageAsDouble < 100, $"Percentage is greater than 100% ({percentageAsDouble}%)");
+            DateTime beginningOfYearDate = new DateTime(currentDate.Year, 1, 1);
+
+
+            var currentDateSpan = TimeSpan.FromTicks(currentDate.Ticks);
+            var newYearDateSpan = TimeSpan.FromTicks(newYearDate.Ticks);
+            var currentYearDateSpan = TimeSpan.FromTicks(beginningOfYearDate.Ticks);
+
+            double currentDateDays = currentDateSpan.TotalDays;
+            double newYearDays = newYearDateSpan.TotalDays;
+            double currentYearDays = currentYearDateSpan.TotalDays;
+
+            double totalDaysDifference = newYearDays - currentDateDays;
+
+            double yearLengthInDays = newYearDays - currentYearDays;
+
+            double daysThatHaveWentBySinceYearStart = yearLengthInDays - totalDaysDifference;
+
+            double percentageAsDouble = daysThatHaveWentBySinceYearStart / yearLengthInDays * 100;
+            
+
+            Assert.IsTrue(percentageAsDouble < 100 && percentageAsDouble > 0, $"Percentage is greater than 100% ({percentageAsDouble}%)");
+
+            int percentageAsInteger = (int)Math.Floor(percentageAsDouble);
+            Assert.IsTrue(percentageAsInteger < 100 && percentageAsInteger > 0, "Potential integer problems. Please debug.");
 
         }
 

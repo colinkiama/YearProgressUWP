@@ -24,7 +24,7 @@ namespace YearProgress.Model
             return (int) (currentDate.Ticks / newYearDate.Ticks * 100);
         }
 
-        private TimeSpan GetDifferenceFromNewYears()
+        private TimeSpan GetDifferenceFromNewYear()
         {
             TimeSpan dateDifference = newYearDate - currentDate;
             return dateDifference;

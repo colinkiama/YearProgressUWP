@@ -2,14 +2,16 @@
 using System;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 
 namespace YearProgressUnitTest
 {
     [TestClass]
     public class DateCalcTests
     {
-        DateTime currentDate = new DateTime(2018,4,8);
-        DateTime newYearDate;
+       public DateTime currentDate = new DateTime(2018,4,8);
+       public DateTime newYearDate;
+       public int percentage;
         public void Do()
         {
             DifferenceBetweenDatesTest();
@@ -60,8 +62,44 @@ namespace YearProgressUnitTest
             int percentageAsInteger = (int)Math.Floor(percentageAsDouble);
             Assert.IsTrue(percentageAsInteger < 100 && percentageAsInteger > 0, "Potential integer problems. Please debug.");
 
+            percentage = percentageAsInteger;
         }
 
         
+        
+    }
+    [TestClass]
+    public class NotificationSettingsTests
+    {
+        public const int expepctedPercentage = 25;
+        [TestMethod]
+        public void FiveMinIntervalNotificationTest()
+        {
+            DateCalcTests dateCalcObject = new DateCalcTests();
+            dateCalcObject.Do();
+            int percentageDisplayed = 0;
+
+            for (int i = 100; i > -1 ; i-=5)
+            {
+                
+                if (dateCalcObject.percentage >= i)
+                {
+                    Logger.LogMessage($"{dateCalcObject.currentDate.Year} is {i}% complete");
+                    percentageDisplayed = i;
+                    break;
+                }
+
+                if (i == 100)
+                {
+                    if (dateCalcObject.percentage >= 99)
+                    {
+                       Logger.LogMessage($"{dateCalcObject.currentDate.Year} is 99% complete");
+                       percentageDisplayed = i;
+                    }
+                }
+            }
+            
+            Assert.IsTrue(percentageDisplayed == expepctedPercentage, $"Displyed percentage is {percentageDisplayed}");
+        }
     }
 }

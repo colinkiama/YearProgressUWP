@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="772a0594-2d31-41da-8943-6dc11c60a91c" Publisher="CN=colinkiama" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="772a0594-2d31-41da-8943-6dc11c60a91c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="64942ColinKiama.YearProgress" Publisher="CN=D2DBA6D7-296F-484A-BABE-2B76C9C2AF78" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="e110c0d3-44b6-49a2-aeda-07073875da0c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>YearProgress</DisplayName>
-    <PublisherDisplayName>colinkiama</PublisherDisplayName>
+    <DisplayName>Year Progress</DisplayName>
+    <PublisherDisplayName>Colin Kiama</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="YearProgress.App">
-      <uap:VisualElements DisplayName="YearProgress" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="YearProgress" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Year Progress" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="YearProgress" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

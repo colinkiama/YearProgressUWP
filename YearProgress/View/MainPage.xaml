@@ -12,28 +12,20 @@
     <Page.Resources>
         <vm:MainPageViewModel x:Name="ViewModel"/>
         <converters:PercentageConverter x:Name="PercentageConverter"/>
-        <converters:DateToStringConverter x:Name="DateToStringConverter"/>
-        
-        
+
+
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment"
                     Value="Center"/>
         </Style>
     </Page.Resources>
-    
+
     <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-       
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <ScrollViewer>
-            <StackPanel>
+
+        <Grid>
+
+            <StackPanel HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind ViewModel.DateCalcObject.yearProgressPercentage, Converter={StaticResource PercentageConverter}}"
                            FontSize="128"
                            FontWeight="SemiBold"
@@ -45,13 +37,10 @@
                     Value="0"
                     Foreground="White"
                     Name="PercentageProgressBar"/>
-               
             </StackPanel>
-            </ScrollViewer>
-            
+
         </Grid>
-        <Grid  VerticalAlignment="Bottom"
-                   Grid.RowSpan="2">
+        <Grid VerticalAlignment="Bottom">
         <TextBlock Text="{x:Bind ViewModel.DateCalcObject.currentDate.Year}"
                    Margin="0,0,0,20"
                    FontSize="36"

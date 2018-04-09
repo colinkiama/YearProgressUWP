@@ -90,10 +90,9 @@ namespace YearProgress
 
         private void AdjustWindowSettings()
         {
-            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.ButtonBackgroundColor = Colors.Transparent;
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+            var appView = ApplicationView.GetForCurrentView();
+            appView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            appView.SuppressSystemOverlays = true;
         }
 
         /// <summary>

@@ -7,17 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:vm="using:YearProgress.ViewModel"
-    xmlns:converters="using:YearProgress.Converters">
+    xmlns:converters="using:YearProgress.Converters"
+    xmlns:yearprogress="using:YearProgress">
     <Page.Resources>
         <vm:MainPageViewModel x:Name="ViewModel"/>
         <converters:PercentageConverter x:Name="PercentageConverter"/>
         <converters:DateToStringConverter x:Name="DateToStringConverter"/>
+        
+        
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment"
                     Value="Center"/>
         </Style>
     </Page.Resources>
-    <ScrollViewer>
+    
     <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -29,6 +32,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+            <ScrollViewer>
             <StackPanel>
                 <TextBlock Text="{x:Bind ViewModel.DateCalcObject.yearProgressPercentage, Converter={StaticResource PercentageConverter}}"
                            FontSize="128"
@@ -43,12 +47,165 @@
                     Name="PercentageProgressBar"/>
                
             </StackPanel>
-            <TextBlock Text="{x:Bind ViewModel.DateCalcObject.currentDate.Year}"
-                   Margin="0,80,0,0"
+            </ScrollViewer>
+            
+        </Grid>
+        <Grid  VerticalAlignment="Bottom"
+                   Grid.RowSpan="2">
+        <TextBlock Text="{x:Bind ViewModel.DateCalcObject.currentDate.Year}"
+                   Margin="0,0,0,20"
                    FontSize="36"
                    FontWeight="Bold"
-                       Grid.Row="1"/>
+                   HorizontalAlignment="Center"/>
+            <Button Name="aboutButton"
+                    Content="?"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,20,20"
+                    Height="40"
+                    Width="40"
+                    FontSize="20">
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel>
+                            <TextBlock Text="About"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"/>
+                            <TextBlock Text="Contact Me:"
+                                       FontWeight="SemiBold"
+                                       Margin="0,12,0,0"/>
+                            <HyperlinkButton Content="Email" NavigateUri="{x:Bind ViewModel.emailUri}"/>
+                            <HyperlinkButton Content="Twitter" NavigateUri="{x:Bind ViewModel.twitterUri}"/>
+                            <HyperlinkButton Content="GitHub" NavigateUri="{x:Bind ViewModel.gitHubUri}"/>
+                            
+                            <Button Content="Send Feedback"
+                                    Name="FeedbackButton"
+                                    Click="{x:Bind ViewModel.myClickHandler.Invoke}"
+                                    Margin="0,20"/>
+                            
+                            <TextBlock Text="Created By: Colin Kiama"/>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+                <Button.Style>
+                    <Style 
+              TargetType="Button">
+                        <Setter Property="Background"
+          Value="{ThemeResource ButtonBackground}" />
+                        <Setter Property="Foreground"
+          Value="{ThemeResource ButtonForeground}" />
+                        <Setter Property="BorderBrush"
+          Value="{ThemeResource ButtonBorderBrush}" />
+                        <Setter Property="BorderThickness"
+          Value="{ThemeResource ButtonBorderThemeThickness}" />
+                        <Setter Property="Padding"
+          Value="8,4,8,4" />
+                        <Setter Property="HorizontalAlignment"
+          Value="Left" />
+                        <Setter Property="VerticalAlignment"
+          Value="Center" />
+                        <Setter Property="FontFamily"
+          Value="{ThemeResource ContentControlThemeFontFamily}" />
+                        <Setter Property="FontWeight"
+          Value="Normal" />
+                        <Setter Property="FontSize"
+          Value="{ThemeResource ControlContentThemeFontSize}" />
+                        <Setter Property="UseSystemFocusVisuals"
+          Value="True" />
+                       
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid x:Name="RootGrid"
+              Background="{TemplateBinding Background}"
+              CornerRadius="250,250,250,250">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <Storyboard>
+                                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="PointerOver">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                 Storyboard.TargetName="RootGrid">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonBackgroundPointerOver}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush"
+                                                 Storyboard.TargetName="ContentPresenter">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonBorderBrushPointerOver}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                 Storyboard.TargetName="ContentPresenter">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                 Storyboard.TargetName="RootGrid">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonBackgroundPressed}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush"
+                                                 Storyboard.TargetName="ContentPresenter">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonBorderBrushPressed}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                 Storyboard.TargetName="ContentPresenter">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonForegroundPressed}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                 Storyboard.TargetName="RootGrid">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonBackgroundDisabled}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush"
+                                                 Storyboard.TargetName="ContentPresenter">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonBorderBrushDisabled}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                 Storyboard.TargetName="ContentPresenter">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{ThemeResource ButtonForegroundDisabled}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                        <ContentPresenter x:Name="ContentPresenter"
+                            AutomationProperties.AccessibilityView="Raw"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Padding="{TemplateBinding Padding}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            CornerRadius="250,250,250,250" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Grid>
-    </ScrollViewer>
+   
 </Page>

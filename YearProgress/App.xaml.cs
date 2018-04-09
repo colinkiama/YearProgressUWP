@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Services.Store.Engagement;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -41,9 +43,11 @@ namespace YearProgress
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             AdjustWindowSettings();
+            await RegisterForDevCenterNotifcationsAsync();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -76,6 +80,12 @@ namespace YearProgress
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private async Task RegisterForDevCenterNotifcationsAsync()
+        {
+            StoreServicesEngagementManager engagementManager = StoreServicesEngagementManager.GetDefault();
+            await engagementManager.RegisterNotificationChannelAsync();
         }
 
         private void AdjustWindowSettings()

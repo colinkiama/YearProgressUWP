@@ -12,6 +12,12 @@ namespace YearProgressUnitTest
        public DateTime currentDate = new DateTime(2018,4,8);
        public DateTime newYearDate;
        public int percentage;
+
+        public DateCalcTests()
+        {
+            Do();
+        }
+
         public void Do()
         {
             DifferenceBetweenDatesTest();
@@ -72,11 +78,35 @@ namespace YearProgressUnitTest
     public class NotificationSettingsTests
     {
         public const int expepctedPercentage = 25;
+        public DateCalcTests dateCalcObject = new DateCalcTests();
+
+
+
+        [TestMethod]
+        public void NewYearNotificationTest()
+        {
+            // Simulating new years day
+            int currentYear = dateCalcObject.currentDate.Year;
+            int currentNewYear = dateCalcObject.newYearDate.Year;
+
+            DateTime dateNow = new DateTime(2019, 1, 1);
+            Assert.IsTrue(dateNow.Year > currentYear, $"Current year ({currentYear}) is the same as the today's year ({dateNow.Year}");
+
+            if (dateNow.Year > currentYear)
+            {
+                Logger.LogMessage($"Happy New Year! - {currentYear} is 100% Complete!");
+            }
+            dateCalcObject.currentDate = dateNow;
+            dateCalcObject.newYearDate = dateCalcObject.newYearDate.AddYears(1);
+
+            Logger.LogMessage($"New current date: {dateCalcObject.currentDate}");
+            Logger.LogMessage($"New new year date: {dateCalcObject.newYearDate}");
+        }
+
         [TestMethod]
         public void FiveMinIntervalNotificationTest()
         {
-            DateCalcTests dateCalcObject = new DateCalcTests();
-            dateCalcObject.Do();
+          
             int percentageDisplayed = 0;
 
             for (int i = 100; i > -1 ; i-=5)

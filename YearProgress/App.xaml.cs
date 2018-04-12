@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using YearProgress.Helper;
 using YearProgress.View;
 
 namespace YearProgress
@@ -45,8 +46,7 @@ namespace YearProgress
         /// <param name="e">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            AdjustWindowSettings();
-            await RegisterForDevCenterNotifcationsAsync();
+            await appStartup();
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -80,6 +80,18 @@ namespace YearProgress
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private async Task appStartup()
+        {
+            AdjustWindowSettings();
+            await RegisterForDevCenterNotifcationsAsync();
+            RegisterBackgroundTask();
+        }
+
+        private void RegisterBackgroundTask()
+        {
+            new NotificationHelper().RegisterBackgroundTasks();
         }
 
         private async Task RegisterForDevCenterNotifcationsAsync()

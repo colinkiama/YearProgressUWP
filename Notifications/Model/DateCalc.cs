@@ -9,12 +9,10 @@ namespace Notifications.Model
     public sealed class DateCalc
     {
 
-        
-
         private DateTime _currentDate;
         private DateTime _newYearDate;
 
-        // Now uses DateTimeOffset instead of DateTime for properties because DateTime isn't supported by the Windows Runtime
+        // Now uses DateTimeOffset instead of DateTime for public properties because DateTime isn't supported by the Windows Runtime
         public DateTimeOffset currentDate
         {
             get { return new DateTimeOffset(_currentDate); }

@@ -26,7 +26,7 @@ namespace YearProgress.Helper
             RegisterMilestoneTask();
             RegisterTimeZoneChangeTask();
 
-           
+
 
 
         }
@@ -45,12 +45,15 @@ namespace YearProgress.Helper
                 }
             }
 
-            var builder = new BackgroundTaskBuilder();
+            if (!taskRegistered)
+            {
+                var builder = new BackgroundTaskBuilder();
 
-            builder.Name = taskName;
-            builder.TaskEntryPoint = _timeZoneTaskEntryPoint;
-            builder.SetTrigger(new SystemTrigger(SystemTriggerType.TimeZoneChange, false));
-            BackgroundTaskRegistration task = builder.Register();
+                builder.Name = taskName;
+                builder.TaskEntryPoint = _timeZoneTaskEntryPoint;
+                builder.SetTrigger(new SystemTrigger(SystemTriggerType.TimeZoneChange, false));
+                BackgroundTaskRegistration task = builder.Register();
+            }
         }
 
         private void RegisterMilestoneTask()
@@ -67,15 +70,19 @@ namespace YearProgress.Helper
                 }
             }
 
-            var builder = new BackgroundTaskBuilder();
+            if (!taskRegistered)
+            {
+                var builder = new BackgroundTaskBuilder();
 
-            builder.Name = taskName;
-            builder.TaskEntryPoint = _milestoneTaskEntryPoint;
-            builder.SetTrigger(new TimeTrigger(_minutesInADay, false));
+                builder.Name = taskName;
+                builder.TaskEntryPoint = _milestoneTaskEntryPoint;
+                builder.SetTrigger(new TimeTrigger(_minutesInADay, false));
 
-            builder.AddCondition(new SystemCondition(SystemConditionType.UserPresent));
+                builder.AddCondition(new SystemCondition(SystemConditionType.UserPresent));
 
-            BackgroundTaskRegistration task = builder.Register();
+                BackgroundTaskRegistration task = builder.Register();
+
+            }
         }
     }
 

@@ -12,7 +12,7 @@ namespace Notifications
 {
     public sealed class Notifications: IBackgroundTask
     {
-        BackgroundTaskDeferral _deferral;
+        
         DateCalc dateCalculation = new DateCalc();
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -24,7 +24,7 @@ namespace Notifications
                 SendAMilestoneNotification(yearProgress);
             }
           
-            _deferral.Complete();
+            
         }
 
         private void SendAMilestoneNotification(int yearProgress)

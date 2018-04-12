@@ -80,7 +80,13 @@ namespace YearProgress
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+                UpdateTiles();
             }
+        }
+
+        private void UpdateTiles()
+        {
+            new Notifications.Tiles().SendTileNotification();
         }
 
         private async Task appStartup()

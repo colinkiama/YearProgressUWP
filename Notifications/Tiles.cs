@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Notifications.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Notifications
 {
     public sealed class Tiles: IBackgroundTask
     {
+        DateCalc dateCalculation = new DateCalc();
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             SendTileNotification();
@@ -31,13 +33,13 @@ namespace Notifications
                 {
                     new AdaptiveText()
                     {
-                        Text = "25%",
+                        Text = $"{dateCalculation.yearProgressPercentage}%",
                         HintStyle = AdaptiveTextStyle.Base,
                         HintAlign = AdaptiveTextAlign.Center
                     },
                     new AdaptiveText()
                     {
-                        Text = "2018",
+                        Text = $"{dateCalculation.currentDate.Year}",
                         HintStyle = AdaptiveTextStyle.CaptionSubtle,
                         HintAlign = AdaptiveTextAlign.Center
                     }
@@ -53,7 +55,7 @@ namespace Notifications
                 {
                     new AdaptiveText()
                     {
-                        Text = "25%",
+                        Text = $"{dateCalculation.yearProgressPercentage}%",
                         HintStyle = AdaptiveTextStyle.Title,
                         HintWrap = true,
                         HintAlign = AdaptiveTextAlign.Center
@@ -66,7 +68,7 @@ namespace Notifications
                     },
                     new AdaptiveText()
                     {
-                        Text = "2018",
+                        Text =  $"{dateCalculation.currentDate.Year}",
                         HintStyle = AdaptiveTextStyle.CaptionSubtle,
                         HintAlign = AdaptiveTextAlign.Center
                     }
@@ -83,13 +85,13 @@ namespace Notifications
                 {
                     new AdaptiveText()
                     {
-                        Text = "25% Complete",
+                        Text = $"{dateCalculation.yearProgressPercentage}% Complete",
                         HintStyle = AdaptiveTextStyle.Title,
                         HintAlign = AdaptiveTextAlign.Center
                     },
                     new AdaptiveText()
                     {
-                        Text = "2018 Year Progress",
+                        Text =  $"{dateCalculation.currentDate.Year} Year Progress",
                         HintStyle = AdaptiveTextStyle.CaptionSubtle,
                         HintAlign = AdaptiveTextAlign.Center
                     }

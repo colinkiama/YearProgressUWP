@@ -80,7 +80,6 @@ namespace YearProgress
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
-                UpdateTiles();
             }
         }
 
@@ -91,11 +90,11 @@ namespace YearProgress
 
         private async Task appStartup()
         {
-
             AdjustWindowSettings();
             AdjustSettingsForAppVersion();
             await RegisterForDevCenterNotifcationsAsync();
             RegisterBackgroundTask();
+            UpdateTiles();
         }
 
         private void AdjustSettingsForAppVersion()

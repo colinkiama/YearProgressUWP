@@ -14,8 +14,6 @@ namespace Notifications
         public void Run(IBackgroundTaskInstance taskInstance)
         {
 
-
-            _deferral.Complete();
         }
     }
 }

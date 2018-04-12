@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.UI.Notifications;
 
 namespace YearProgress.Helper
 {
@@ -14,9 +16,34 @@ namespace YearProgress.Helper
         private const int _minutesInADay = 1440;
 
 
-        public void SendTutorialNotifcation()
+        internal static void SendTutorialNotifcation()
         {
+            var toastContent = new ToastContent()
+            {
+                Visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+            {
+                new AdaptiveText()
+                {
+                    Text = "Thanks for downloading this app!"
+                },
+                new AdaptiveText()
+                {
+                    Text = "We'll send progress milestone notifcations at 5% intervals and major milestone notifications at 25% intervals. "
+                }
+            }
+                    }
+                }
+            };
 
+            // Create the toast notification
+            var toastNotif = new ToastNotification(toastContent.GetXml());
+
+            // And send the notification
+            ToastNotificationManager.CreateToastNotifier().Show(toastNotif);
         }
 
 

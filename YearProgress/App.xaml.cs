@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using YearProgress.Core;
 using YearProgress.Helper;
 using YearProgress.View;
 
@@ -84,9 +85,29 @@ namespace YearProgress
 
         private async Task appStartup()
         {
+
             AdjustWindowSettings();
+            AdjustSettingsForAppVersion();
             await RegisterForDevCenterNotifcationsAsync();
             RegisterBackgroundTask();
+        }
+
+        private void AdjustSettingsForAppVersion()
+        {
+          var appVersionStatus  =  Mango.App.appVersionChecker.getAppVersionStatus();
+            switch (appVersionStatus)
+            {
+                case Mango.Enums.appVersionStatus.FirstTime:
+                    NotificationHelper.SendTutorialNotifcation();
+                    // Save Data
+                    break;
+                case Mango.Enums.appVersionStatus.Old:
+                    // Do migrations then load data
+                case Mango.Enums.appVersionStatus.Current:
+                    // Load data
+                    break;
+               
+            }
         }
 
         private void RegisterBackgroundTask()
@@ -103,8 +124,23 @@ namespace YearProgress
         private void AdjustWindowSettings()
         {
             var appView = ApplicationView.GetForCurrentView();
-            appView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
-            appView.SuppressSystemOverlays = true;
+            switch (DeviceDetection.DetectDeviceType())
+            {
+                case Enums.DeviceType.Phone:
+                    appView.SuppressSystemOverlays = true;
+                    appView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+                    break;
+                case Enums.DeviceType.Desktop:
+                    appView.TitleBar.BackgroundColor = Colors.Transparent;
+                    appView.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+                    CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                    break;
+                default:
+                    break;
+            }
+         
+
+          
         }
 
         /// <summary>

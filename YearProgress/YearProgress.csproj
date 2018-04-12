@@ -98,6 +98,8 @@
     </Compile>
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Converters\PercentageConverter.cs" />
+    <Compile Include="Core\DeviceDetection.cs" />
+    <Compile Include="Enums\DeviceType.cs" />
     <Compile Include="Helper\NotificationHelper.cs" />
     <Compile Include="Model\DateCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,6 +176,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Mango.ColinKiama">
+      <Version>0.1.3</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.8</Version>
     </PackageReference>

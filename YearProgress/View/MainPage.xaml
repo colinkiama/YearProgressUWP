@@ -48,11 +48,15 @@
                    HorizontalAlignment="Center"/>
             <Button Name="aboutButton"
                     Content="?"
+                   HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
                     HorizontalAlignment="Right"
                     Margin="0,0,20,20"
                     Height="40"
                     Width="40"
-                    FontSize="20">
+                    Padding="0"
+                    FontSize="20"
+                    Foreground="GhostWhite">
                 <Button.Flyout>
                     <Flyout>
                         <StackPanel>

@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using YearProgress.Core;
-using YearProgress.Helper;
+using YearProgress.Helpers;
 using YearProgress.View;
 
 namespace YearProgress

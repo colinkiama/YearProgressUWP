@@ -21,9 +21,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
-
         <Grid>
-
             <StackPanel HorizontalAlignment="Stretch"
                         VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind ViewModel.DateCalcObject.yearProgressPercentage, Converter={StaticResource PercentageConverter}}"

@@ -8,24 +8,39 @@ namespace Notifications.Model
 {
     public sealed class DateCalc
     {
-        public DateTime currentDate { get; set; }
-        public DateTime newYearDate { get;  set; }
-        public int yearProgressPercentage { get; set; }
+
+        
+
+        private DateTime _currentDate;
+        private DateTime _newYearDate;
+
+        // Now uses DateTimeOffset instead of DateTime for properties because DateTime isn't supported by the Windows Runtime
+        public DateTimeOffset currentDate
+        {
+            get { return new DateTimeOffset(_currentDate); }
+        }
+
+        public DateTimeOffset newYearDate
+        {
+            get { return new DateTimeOffset(_newYearDate); }
+        }
+
+        public int yearProgressPercentage { get; private set; }
 
         public DateCalc()
         {
-            currentDate = DateTime.Now;
-            newYearDate = calculateNewYearDate();
+            _currentDate = DateTime.Now;
+            _newYearDate = calculateNewYearDate();
             yearProgressPercentage = calculateYearProgress();
         }
 
         private int calculateYearProgress()
         {
-            DateTime beginningOfYearDate = new DateTime(currentDate.Year, 1, 1);
+            DateTime beginningOfYearDate = new DateTime(_currentDate.Year, 1, 1);
 
 
-            var currentDateSpan = TimeSpan.FromTicks(currentDate.Ticks);
-            var newYearDateSpan = TimeSpan.FromTicks(newYearDate.Ticks);
+            var currentDateSpan = TimeSpan.FromTicks(_currentDate.Ticks);
+            var newYearDateSpan = TimeSpan.FromTicks(_newYearDate.Ticks);
             var currentYearDateSpan = TimeSpan.FromTicks(beginningOfYearDate.Ticks);
 
             double currentDateDays = currentDateSpan.TotalDays;
@@ -45,19 +60,16 @@ namespace Notifications.Model
 
         private TimeSpan GetDifferenceFromNewYear()
         {
-            TimeSpan dateDifference = newYearDate - currentDate;
+            TimeSpan dateDifference = _newYearDate - _currentDate;
             return dateDifference;
         }
 
         private DateTime calculateNewYearDate()
         {
-             return new DateTime(currentDate.Year + 1, 1, 1);
+            return new DateTime(_currentDate.Year + 1, 1, 1);
         }
 
-        public int getNewYear()
-        {
-            return newYearDate.Year;
-        }
+
 
     }
 }

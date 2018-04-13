@@ -1,0 +1,18 @@
+﻿<ContentDialog
+    x:Class="YearProgress.Control.AskForLiveTilePinDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:YearProgress.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="For the best experience..."
+    PrimaryButtonText="I Understand"
+    SecondaryButtonText=""
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <Grid>
+        <TextBlock Text="We recommend pinning the live tile so you can see the year's progress, without having to open the app at all!&#x0d; &#x0a;You can do this by right-clicking the app in the apps list and selecting &#x22;Pin to start&#x22;."
+                   TextWrapping="WrapWholeWords"/>
+    </Grid>
+</ContentDialog>

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using YearProgress.Control;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,11 +30,17 @@ namespace YearProgress.View
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             AnimateProgressBar();
+            if (App.startupHelper.shouldAskForTilePinning)
+            {
+                await new AskForLiveTilePinDialog().ShowAsync();
+            }
         }
+
+        
 
         private void AnimateProgressBar()
         {

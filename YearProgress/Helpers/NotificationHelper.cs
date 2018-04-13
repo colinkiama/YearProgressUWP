@@ -33,7 +33,7 @@ namespace YearProgress.Helpers
                 },
                 new AdaptiveText()
                 {
-                    Text = "We'll send progress milestone notifcations at 5% intervals and major milestone notifications at 25% intervals. "
+                    Text = "We'll send progress milestone notifcations at 5% intervals."
                 }
             }
                     }

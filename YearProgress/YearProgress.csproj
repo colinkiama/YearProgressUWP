@@ -19,6 +19,9 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>YearProgress_StoreKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>ED8BC9DCBAB21BAD33252A6C636C485421431072</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -96,10 +99,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\AskForLiveTilePinDialog.xaml.cs">
+      <DependentUpon>AskForLiveTilePinDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Converters\PercentageConverter.cs" />
     <Compile Include="Core\DeviceDetection.cs" />
     <Compile Include="Enums\DeviceType.cs" />
+    <Compile Include="Helpers\FirstStartUpHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Model\DateCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +200,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Control\AskForLiveTilePinDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

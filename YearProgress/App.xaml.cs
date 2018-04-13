@@ -34,10 +34,22 @@ namespace YearProgress
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
+        public static FirstStartUpHelper startupHelper = new FirstStartUpHelper();
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            Window.Current.Activated += Current_Activated;
+        }
+
+        private void Current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null)
+            {
+                rootFrame.Navigate(typeof(MainPage));
+            }
         }
 
         /// <summary>
@@ -69,19 +81,15 @@ namespace YearProgress
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
-            {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
-            }
+
+            rootFrame.Navigate(typeof(MainPage), e.Arguments);
+
+            // Ensure the current window is active
+            Window.Current.Activate();
+
         }
+
+
 
         private void UpdateTiles()
         {
@@ -99,19 +107,17 @@ namespace YearProgress
 
         private void AdjustSettingsForAppVersion()
         {
-          var appVersionStatus  =  Mango.App.appVersionChecker.getAppVersionStatus();
+            var appVersionStatus = Mango.App.appVersionChecker.getAppVersionStatus();
             switch (appVersionStatus)
             {
                 case Mango.Enums.appVersionStatus.FirstTime:
                     NotificationHelper.SendTutorialNotifcation();
-                    // Save Data
+                    startupHelper.shouldAskForTilePinning = true;
                     break;
-                case Mango.Enums.appVersionStatus.Old:
-                    // Do migrations then load data
+                case Mango.Enums.appVersionStatus.Old:   
                 case Mango.Enums.appVersionStatus.Current:
-                    // Load data
                     break;
-               
+
             }
         }
 
@@ -131,25 +137,21 @@ namespace YearProgress
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-              
+
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
 
-            
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), args);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
-            }
 
-        
+
+            rootFrame.Navigate(typeof(MainPage), args);
+
+            // Ensure the current window is active
+            Window.Current.Activate();
+        }
+
+
 
         private void RegisterBackgroundTask()
         {
@@ -179,9 +181,9 @@ namespace YearProgress
                 default:
                     break;
             }
-         
 
-          
+
+
         }
 
         /// <summary>

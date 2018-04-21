@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Notifications.Helpers;
 using Notifications.Model;
 using System;
 using System.Collections.Generic;
@@ -12,19 +13,43 @@ namespace Notifications
 {
     public sealed class Notifications : IBackgroundTask
     {
-
+        int savedProgress;
+        bool isGreaterThanSavedProgress = false;
         DateCalc dateCalculation = new DateCalc();
+        SettingsHelper settingsHelper = new SettingsHelper();
         public void Run(IBackgroundTaskInstance taskInstance)
         {
 
-
             int yearProgress = dateCalculation.yearProgressPercentage;
-            if (IsRegularInterval(yearProgress))
+
+            isGreaterThanSavedProgress = IsHigherThanSavedProgress(yearProgress);
+
+            if (isGreaterThanSavedProgress)
             {
-                SendAMilestoneNotification(yearProgress);
+                if (IsRegularInterval(yearProgress))
+                {
+                    SendAMilestoneNotification(yearProgress);
+
+                }
             }
 
+            StoreYearProgressIfNew(yearProgress);
 
+        }
+
+        private void StoreYearProgressIfNew(int yearProgress)
+        {
+            if (isGreaterThanSavedProgress)
+            {
+                settingsHelper.SetYearProgress(yearProgress);
+            }
+        }
+
+        private bool IsHigherThanSavedProgress(int yearProgress)
+        {
+            savedProgress = settingsHelper.GetStoredYearProgress();
+            isGreaterThanSavedProgress = yearProgress > savedProgress;
+            return isGreaterThanSavedProgress;
         }
 
         private void SendAMilestoneNotification(int yearProgress)
@@ -84,6 +109,6 @@ namespace Notifications
             ToastNotificationManager.CreateToastNotifier().Show(toastNotif);
         }
 
-     
+
     }
 }

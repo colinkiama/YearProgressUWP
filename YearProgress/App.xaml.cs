@@ -1,4 +1,5 @@
 ﻿using Microsoft.Services.Store.Engagement;
+using Notifications.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -112,6 +113,7 @@ namespace YearProgress
             {
                 case Mango.Enums.appVersionStatus.FirstTime:
                     NotificationHelper.SendTutorialNotifcation();
+                    InitalizeYearProgress();
                     startupHelper.shouldAskForTilePinning = true;
                     break;
                 case Mango.Enums.appVersionStatus.Old:   
@@ -119,6 +121,12 @@ namespace YearProgress
                     break;
 
             }
+        }
+
+        private void InitalizeYearProgress()
+        {
+            SettingsHelper settingsHelper = new SettingsHelper();
+            settingsHelper.ResetProgressValueSettings();
         }
 
         protected async override void OnActivated(IActivatedEventArgs args)

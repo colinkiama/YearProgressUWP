@@ -1,2 +1,2 @@
 # YearProgressUWP
-Literally tells you the current year's progress as a percentage
+UWP app that reminds you of where you are in time, the bigger picture, how much of the year has been completed.

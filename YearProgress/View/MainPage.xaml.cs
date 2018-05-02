@@ -7,6 +7,7 @@ using UltraTimer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,6 +29,16 @@ namespace YearProgress.View
         public MainPage()
         {
             this.InitializeComponent();
+
+
+#if DEBUG
+            topAd.ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1";
+            topAd.AdUnitId = "test";
+#else
+            topAd.ApplicationId = "9pdq5mljfvsx";
+            topAd.AdUnitId = "1100022477";
+
+#endif
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,6 +49,7 @@ namespace YearProgress.View
             {
                 await new AskForLiveTilePinDialog().ShowAsync();
             }
+           
         }
 
         
@@ -57,9 +69,10 @@ namespace YearProgress.View
             {
                 PercentageProgressBar.Value += intervalAmount;
             };
-
             progressTimer.StartTimer();
+            
         }
 
+       
     }
 }

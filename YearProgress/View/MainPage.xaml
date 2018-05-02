@@ -8,7 +8,10 @@
     mc:Ignorable="d"
     xmlns:vm="using:YearProgress.ViewModel"
     xmlns:converters="using:YearProgress.Converters"
-    xmlns:yearprogress="using:YearProgress">
+    xmlns:yearprogress="using:YearProgress"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+
+    Background="{ThemeResource SystemControlBackgroundAccentBrush}">
     <Page.Resources>
         <vm:MainPageViewModel x:Name="ViewModel"/>
         <converters:PercentageConverter x:Name="PercentageConverter"/>
@@ -22,6 +25,15 @@
 
     <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
         <Grid>
+            <UI:AdControl 
+        
+        HorizontalAlignment="Center"
+        Height="50"
+        VerticalAlignment="Top"
+        Width="320"
+                          Name="topAd"
+                          Margin="0,50,0,0"/>
+
             <StackPanel HorizontalAlignment="Stretch"
                         VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind ViewModel.DateCalcObject.yearProgressPercentage, Converter={StaticResource PercentageConverter}}"

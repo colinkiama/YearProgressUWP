@@ -61,7 +61,7 @@ namespace YearProgress.View
 
             int percentageToLoad = ViewModel.YearProgress;
             int animationTimeInMiliseconds = 500;
-            int intervalAmount = percentageToLoad/ numberOfIntervals;
+            double intervalAmount = (double)percentageToLoad/ numberOfIntervals;
             int intervalTime = animationTimeInMiliseconds / numberOfIntervals;
 
             Timer progressTimer = new Timer(new TimeSpan(0,0,0,0,animationTimeInMiliseconds), new TimeSpan(0,0,0,0,intervalTime));

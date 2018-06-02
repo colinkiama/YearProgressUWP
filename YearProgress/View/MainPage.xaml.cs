@@ -30,6 +30,7 @@ namespace YearProgress.View
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        bool wasCopyButtonClicked = false;
         public MainPage()
         {
             this.InitializeComponent();
@@ -44,23 +45,23 @@ namespace YearProgress.View
 
 #endif
 
+            ViewModel.CopyButtonClicked += ViewModel_CopyButtonClicked;
             Clipboard.ContentChanged += Clipboard_ContentChanged;
+            
+        }
+
+        private void ViewModel_CopyButtonClicked(object sender, EventArgs e)
+        {
+            wasCopyButtonClicked = true;
         }
 
         private async void Clipboard_ContentChanged(object sender, object e)
         {
-            await ShowContentHasBeenCopied();
-            
-            // Event listener is unsubscribed then subscribed again
-            // because the ContentChanged event is triggered by the
-            // Flush Method, resulting in this method
-            // looping continously!
-            Clipboard.ContentChanged -= Clipboard_ContentChanged;
-
-            //Flush method is used for a more reliable "Copy"
-            Clipboard.Flush();
-
-            Clipboard.ContentChanged += Clipboard_ContentChanged;
+            if (wasCopyButtonClicked)
+            {
+                await ShowContentHasBeenCopied();
+                wasCopyButtonClicked = false;
+            }
         }
 
         private async Task ShowContentHasBeenCopied()

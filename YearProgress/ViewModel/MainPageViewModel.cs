@@ -17,6 +17,9 @@ namespace YearProgress.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler ViewModelLoaded;
+
+        public event EventHandler CopyButtonClicked;
+
         public DateCalc DateCalcObject { get; set; }
         private int _yearProgress;
 
@@ -61,6 +64,8 @@ namespace YearProgress.ViewModel
 
         private void CopyButton_Click(object sender, RoutedEventArgs e)
         {
+            CopyButtonClicked?.Invoke(this, EventArgs.Empty);
+
             DataPackage datapkg = new DataPackage();
             datapkg.SetText($"{DateCalcObject.currentDate.Year} is {YearProgress}% complete! - Shared Via Year Progress: https://bit.ly/2JcQEfE");
             Clipboard.SetContent(datapkg);

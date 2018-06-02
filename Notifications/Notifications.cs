@@ -26,11 +26,10 @@ namespace Notifications
 
             if (isGreaterThanSavedProgress)
             {
-                if (IsRegularInterval(yearProgress))
-                {
+               
                     SendAMilestoneNotification(yearProgress);
 
-                }
+              
             }
 
             StoreYearProgressIfNew(yearProgress);
@@ -58,27 +57,6 @@ namespace Notifications
             SendRegularMilestoneNotification(yearProgress);
 
         }
-
-        public bool IsRegularInterval(int yearProgress)
-        {
-            const int regularInterval = 5;
-
-            bool progressIsRegularInterval = false;
-
-
-            if (yearProgress > 0)
-            {
-                if (yearProgress % regularInterval == 0)
-                {
-                    progressIsRegularInterval = true;
-                }
-
-            }
-
-            return progressIsRegularInterval;
-        }
-
-
 
 
 

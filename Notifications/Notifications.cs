@@ -14,7 +14,7 @@ namespace Notifications
     public sealed class Notifications : IBackgroundTask
     {
         int savedProgress;
-        bool isGreaterThanSavedProgress = false;
+        bool hasSavedProgressChanged = false;
         DateCalc dateCalculation = new DateCalc();
         SettingsHelper settingsHelper = new SettingsHelper();
         public void Run(IBackgroundTaskInstance taskInstance)
@@ -22,14 +22,11 @@ namespace Notifications
 
             int yearProgress = dateCalculation.yearProgressPercentage;
 
-            isGreaterThanSavedProgress = IsHigherThanSavedProgress(yearProgress);
+            hasSavedProgressChanged = isDifferentToSavedProgress(yearProgress);
 
-            if (isGreaterThanSavedProgress)
+            if (hasSavedProgressChanged)
             {
-               
-                    SendAMilestoneNotification(yearProgress);
-
-              
+                SendAMilestoneNotification(yearProgress);
             }
 
             StoreYearProgressIfNew(yearProgress);
@@ -38,17 +35,17 @@ namespace Notifications
 
         private void StoreYearProgressIfNew(int yearProgress)
         {
-            if (isGreaterThanSavedProgress)
+            if (hasSavedProgressChanged)
             {
                 settingsHelper.SetYearProgress(yearProgress);
             }
         }
 
-        private bool IsHigherThanSavedProgress(int yearProgress)
+        private bool isDifferentToSavedProgress(int yearProgress)
         {
             savedProgress = settingsHelper.GetStoredYearProgress();
-            isGreaterThanSavedProgress = yearProgress > savedProgress;
-            return isGreaterThanSavedProgress;
+            hasSavedProgressChanged = yearProgress != savedProgress;
+            return hasSavedProgressChanged;
         }
 
         private void SendAMilestoneNotification(int yearProgress)

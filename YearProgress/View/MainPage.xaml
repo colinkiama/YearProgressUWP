@@ -23,7 +23,8 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+    <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+          Name="rootGrid">
         <Grid>
             <UI:AdControl 
         
@@ -47,19 +48,32 @@
                     Value="0"
                     Foreground="White"
                     Name="PercentageProgressBar"/>
-
-                <Button Name="ShareButton"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                            Margin="0,20,0,0">
+                    <Button Name="ShareButton"
                         Click="{x:Bind ViewModel.shareButtonHandler.Invoke}"
-                        HorizontalAlignment="Center"
                         Style="{ThemeResource TextBlockButtonStyle}"
                         Foreground="White"
-                        Margin="0,20,0,0">
-                    <Button.Content>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" 
+                        Margin="20,0">
+                        <Button.Content>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" 
                                   Glyph="&#xE72D;"
                                   FontSize="36"/>
-                    </Button.Content>
-                </Button>
+                        </Button.Content>
+                    </Button>
+                    
+                    <Button Name="CopyButton"
+                        Click="{x:Bind ViewModel.copyButtonHandler.Invoke}"
+                        Style="{ThemeResource TextBlockButtonStyle}"
+                        Foreground="White"
+                            Margin="20,0">
+                        <Button.Content>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" 
+                                      Glyph="&#xE8C8;" 
+                                      FontSize="36"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
         </Grid>

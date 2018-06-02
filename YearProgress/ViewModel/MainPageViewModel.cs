@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using YearProgress.Model;
 
 namespace YearProgress.ViewModel
@@ -21,6 +23,7 @@ namespace YearProgress.ViewModel
         public delegate void ClickHandler(object sender, RoutedEventArgs e);
         public ClickHandler myClickHandler;
         public ClickHandler shareButtonHandler;
+        public ClickHandler copyButtonHandler;
 
        public Uri twitterUri = new Uri("https://www.twitter.com/colinkiama");
         public Uri gitHubUri = new Uri("https://www.github.com/colinkiama");
@@ -45,11 +48,22 @@ namespace YearProgress.ViewModel
         {
             DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
-
             DateCalcObject = new DateCalc();
             ViewModelLoaded?.Invoke(this, EventArgs.Empty);
             myClickHandler = new ClickHandler(FeedbackButton_Click);
             shareButtonHandler = new ClickHandler(ShareButton_Click);
+            copyButtonHandler = new ClickHandler(CopyButton_Click);
+        }
+
+       
+
+        
+
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataPackage datapkg = new DataPackage();
+            datapkg.SetText($"{DateCalcObject.currentDate.Year} is {YearProgress}% complete! - Shared Via Year Progress: https://bit.ly/2JcQEfE");
+            Clipboard.SetContent(datapkg);
         }
 
         private void ShareButton_Click(object sender, RoutedEventArgs e)

@@ -40,8 +40,8 @@ namespace YearProgress.View
             topAd.ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1";
             topAd.AdUnitId = "test";
 #else
-            topAd.ApplicationId = "9pdq5mljfvsx";
-            topAd.AdUnitId = "1100022477";
+            topAd.ApplicationId = "APPID";
+            topAd.AdUnitId = "ADUNITID";
 
 #endif
 

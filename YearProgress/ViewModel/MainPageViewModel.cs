@@ -65,7 +65,6 @@ namespace YearProgress.ViewModel
         private void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             CopyButtonClicked?.Invoke(this, EventArgs.Empty);
-
             DataPackage datapkg = new DataPackage();
             datapkg.SetText($"{DateCalcObject.currentDate.Year} is {YearProgress}% complete! - Shared Via Year Progress: https://bit.ly/2JcQEfE");
             Clipboard.SetContent(datapkg);
@@ -73,17 +72,15 @@ namespace YearProgress.ViewModel
 
         private void ShareButton_Click(object sender, RoutedEventArgs e)
         {
-            
             DataTransferManager.ShowShareUI();
         }
 
         private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             DataRequest request = args.Request;
-            request.Data.SetText($"{DateCalcObject.currentDate.Year} is {YearProgress}% complete! - Shared Via Year Progress: https://bit.ly/2JcQEfE");
             request.Data.Properties.Title = "Year Progress";
             request.Data.Properties.Description = "Effortlessly share the progress of the year to other apps";
-            
+            request.Data.SetText($"{DateCalcObject.currentDate.Year} is {YearProgress}% complete! - Shared Via Year Progress: https://bit.ly/2JcQEfE");
         }
 
         private async void FeedbackButton_Click(object sender, RoutedEventArgs e)

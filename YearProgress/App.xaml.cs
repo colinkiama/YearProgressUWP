@@ -45,13 +45,9 @@ namespace YearProgress
             this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
             this.Suspending += OnSuspending;
             Window.Current.Activated += Current_Activated;
-            this.EnteredBackground += App_EnteredBackground;
         }
 
-        private void App_EnteredBackground(object sender, EnteredBackgroundEventArgs e)
-        {
-            Clipboard.Flush();
-        }
+       
 
         private void Current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
         {

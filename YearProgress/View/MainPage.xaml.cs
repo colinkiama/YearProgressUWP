@@ -44,6 +44,9 @@ namespace YearProgress.View
             //topAd.AdUnitId = "test";
 
 
+
+
+
 #else
             // Remove or replace these lines or project will fail to run
             topAd.ApplicationId = AdKeys.appId;

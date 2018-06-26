@@ -21,6 +21,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using YearProgress.Control;
 
+// Remove this using statement or project will fail to build
+using YearProgress.adKeys;
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace YearProgress.View
@@ -37,11 +40,14 @@ namespace YearProgress.View
 
 
 #if DEBUG
-            topAd.ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1";
-            topAd.AdUnitId = "test";
+            //topAd.ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1";
+            //topAd.AdUnitId = "test";
+
+
 #else
-            topAd.ApplicationId = "APPID";
-            topAd.AdUnitId = "ADUNITID";
+            // Remove or replace these lines or project will fail to run
+            topAd.ApplicationId = AdKeys.appId;
+            topAd.AdUnitId = AdKeys.addUnitId;
 
 #endif
 

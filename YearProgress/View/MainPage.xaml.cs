@@ -23,6 +23,7 @@ using YearProgress.Control;
 
 // Remove this using statement or project will fail to build
 using YearProgress.adKeys;
+using YearProgress.Helpers;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -109,6 +110,7 @@ namespace YearProgress.View
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            await ReviewHelper.TryRequestReview();
             AnimateProgressBar();
             if (App.startupHelper.shouldAskForTilePinning)
             {

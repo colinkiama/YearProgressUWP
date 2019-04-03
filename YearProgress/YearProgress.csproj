@@ -112,6 +112,7 @@
     <Compile Include="Enums\DeviceType.cs" />
     <Compile Include="Helpers\FirstStartUpHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
+    <Compile Include="Helpers\ReviewHelper.cs" />
     <Compile Include="Model\DateCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />

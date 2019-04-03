@@ -30,7 +30,7 @@ namespace YearProgress.ViewModel
 
        public Uri twitterUri = new Uri("https://www.twitter.com/colinkiama");
         public Uri gitHubUri = new Uri("https://www.github.com/colinkiama");
-        public Uri emailUri = new Uri("mailto:colinkiama@hotmail.co.uk");
+        public Uri emailUri = new Uri("mailto:mailto:colinkiama@gmail.com?subject=Year%20Progress%20Feedback&body=<Write%20your%20feedback%20here>");
 
         public int YearProgress
         {

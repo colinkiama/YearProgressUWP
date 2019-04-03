@@ -66,7 +66,6 @@ namespace YearProgress
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             await appStartup();
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -104,6 +103,7 @@ namespace YearProgress
 
         private async Task appStartup()
         {
+            ReviewHelper.TrackAppLaunch();
             AdjustWindowSettings();
             AdjustSettingsForAppVersion();
             await RegisterForDevCenterNotifcationsAsync();

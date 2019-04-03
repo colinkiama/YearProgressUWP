@@ -50,7 +50,7 @@ namespace YearProgress.View
 #else
             // Remove or replace these lines or project will fail to run
             topAd.ApplicationId = AdKeys.appId;
-            topAd.AdUnitId = AdKeys.addUnitId;
+            topAd.AdUnitId = AdKeys.adUnitId;
 
 #endif
 

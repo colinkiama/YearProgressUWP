@@ -48,7 +48,6 @@ namespace YearProgress.Helpers
                     Title = "Enjoying the app?",
                     Content = "It would be lovely if you left a review! 😊",
                     PrimaryButtonText = "Review",
-                    SecondaryButtonText = "Never",
                     CloseButtonText = "Later",
 
                 };
@@ -67,10 +66,6 @@ namespace YearProgress.Helpers
             }
             else
             {
-                if (args.Result == ContentDialogResult.Secondary)
-                {
-                    RemovePromptsForever();
-                }
                 await ShowFeedbackDialog();
             }
         }
